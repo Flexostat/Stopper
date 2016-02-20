@@ -3,7 +3,7 @@
 //3 = bottom
 //anything else = all
 // You must render and print all 3
-part = 5;
+part = 2;
 tube_id = 22.2; // chemglass 25mm tube -> 22.2, kimble cfuge -> 20.3
 
 stopper_height = 20;
@@ -23,12 +23,10 @@ outer_diameter = stopper_d2+2*shell_t;
 intersection() {
 	difference() {
 		union() {
-			if (part != 3) {//shouldn't need this but i do.
-				translate([0, 0,-shell_t]) 
-					cylinder(h=stopper_height+shell_t, d=outer_diameter, $fn=50);
-			}
-			sstube_holes(sstube_loc,sstube_len,sstube_d+2*shell_t);
-			#translate([0,0,-2*shell_t]) clampy_part();
+			translate([0, 0,-shell_t]) 
+				cylinder(h=stopper_height+shell_t, d=outer_diameter, $fn=50);
+			sstube_holes(sstube_loc,sstube_len+[1,1,1]*2*shell_t,sstube_d+2*shell_t);
+			translate([0,0,-2*shell_t]) clampy_part();
 		}
 		//stopper
 		cylinder(h=stopper_height, d1=stopper_d1,d2=stopper_d2, $fn=100);
@@ -40,13 +38,12 @@ intersection() {
 	if (part == 1) {
 		cylinder(h=300,r=300);
 	}
-	if (part == 2) {
-		translate([0, 0, -shell_t])
-		cylinder(h=shell_t,r=300);
-	}
-	if (part == 3) {
-		translate([0, 0, -shell_t-epsilon]) mirror([0,0,1])
+	else if (part == 2 ) {
+		mirror([0,0,1])
 		cylinder(h=300,r=300);
+	} else {
+		translate([0,0,-300])
+		cylinder(h=600,r=300);
 	}
 }
 
