@@ -13,7 +13,7 @@ sstube_d = 2.2+0.4; //small holes need extradilation
 shell_thickness = 1.6;
 sstube_loc = [[0,0],[7.5,0],[-7.5,0]];
 sstube_len = [40,10,10]; //tube length below stopper
-screw_hole_d = 0.156*25.4; 
+screw_hole_d = 0.156*25.4+0.4; 
 
 epsilon = 0.01;
 
